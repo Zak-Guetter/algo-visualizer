@@ -40,7 +40,6 @@ function App() {
             <Route path="/quick-sort" element={<Home/>}/>
             <Route path="/binary-search" element={<Home/>}/>
             <Route path="/linear-search" element={<Home/>}/>
-            
           </Routes>
         </div>
       </div>
