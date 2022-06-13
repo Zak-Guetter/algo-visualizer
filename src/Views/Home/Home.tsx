@@ -1,8 +1,13 @@
-import React from 'react'
+import React from 'react';
+import BarChart from '../../Components/BarChart';
+
+
 
 function Home() {
   return (
-    <div>hello</div>
+    <div className='barChart'>
+      <BarChart />
+    </div>
   )
 }
 

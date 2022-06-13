@@ -1,7 +1,6 @@
 import { ProSidebar, Menu, MenuItem, SubMenu , SidebarHeader} from 'react-pro-sidebar';
 import 'react-pro-sidebar/dist/css/styles.css';
 import React from 'react';
-import { Link } from "react-router-dom";
 
 function Sidebar(props) {
   return (
@@ -14,15 +13,15 @@ function Sidebar(props) {
         <Menu iconShape="square">
           <a href='/'><MenuItem>Home</MenuItem></a>
           <SubMenu title="Sorting Algorithms">
-            <a href='bubble-sort'><MenuItem>Bubble</MenuItem></a>
-            <a href='select-sort'><MenuItem>Select</MenuItem></a>
-            <a href='heap-sort'><MenuItem>Heap</MenuItem></a>
-            <a href='merge-sort'><MenuItem>Merge</MenuItem></a>
-            <a href='quick-sort'><MenuItem>Quick</MenuItem></a>
+            <MenuItem><a href='bubble-sort'>Bubble</a></MenuItem>
+            <MenuItem><a href='select-sort'>Select</a></MenuItem>
+            <MenuItem><a href='heap-sort'>Heap</a></MenuItem>
+            <MenuItem><a href='merge-sort'>Merge</a></MenuItem>
+            <MenuItem><a href='quick-sort'>Quick</a></MenuItem>
           </SubMenu>
           <SubMenu title="Searching Algorithms">
-            <a href='binary-search'><MenuItem>Binary</MenuItem></a>
-            <a href='linear-search'><MenuItem>Linear</MenuItem></a>
+            <MenuItem><a href='binary-search'>Binary</a></MenuItem>
+            <MenuItem><a href='linear-search'>Linear</a></MenuItem>
           </SubMenu>
         </Menu>
       </ProSidebar>
