@@ -1,65 +1,97 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  Title,
-  Tooltip,
-  Legend,
+    Chart as ChartJS,
+    CategoryScale,
+    LinearScale,
+    BarElement,
+    Title,
+    Tooltip,
+    Legend,
 } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
 import { faker } from '@faker-js/faker';
+import { setLabels } from 'react-chartjs-2/dist/utils';
+import Slider from '@mui/material/Slider';
 
-
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  Title,
-  Tooltip,
-  Legend
-);
+ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
 export const options = {
-
-  responsive: true,
-  plugins: {
-    legend: {
-      position: 'top' as const,
+    responsive: true,
+    plugins: {
+        legend: {
+            display: false,
+        },
     },
-    title: {
-      display: true,
-      text: 'Chart.js Bar Chart',
+    scales: {
+        x: {
+            display: false,
+        },
+        y: {
+            display: false,
+        },
     },
-  },
 };
 
-const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
-
-export const data = {
-  labels,
-  datasets: [
-    {
-      label: 'Dataset 1',
-      data: labels.map(() => faker.datatype.number({ min: 0, max: 1000 })),
-      backgroundColor: 'rgba(255, 99, 132, 0.5)',
-    },
-    {
-      label: 'Dataset 2',
-      data: labels.map(() => faker.datatype.number({ min: 0, max: 1000 })),
-      backgroundColor: 'rgba(53, 162, 235, 0.5)',
-    },
-  ],
-};
-
-
-function BarChart() {
-  return (
-    <div className='barChart'>
-      <Bar options={options} data={data} />
-    </div>
-  )
+function getData(amount: number) {
+    let min = 1;
+    let max = amount;
+    let array: Array<Object> = [];
+    for (let i = 0; i < amount; i++) {
+        array.push({ x: i, y: Math.floor(Math.random() * (max - min + 1) + min) });
+    }
+    return array;
+}
+function getLabels(amount: number) {
+    let label: Array<String> = [];
+    for (let i = 0; i < amount; i++) {
+        label.push(`Item: ${i}`);
+    }
+    return label;
 }
 
-export default BarChart
+function BarChart() {
+    const [amount, setAmount] = useState(200);
+    const [data, setData] = useState(getData(amount));
+    const [labels, setLabels] = useState(getLabels(amount));
+    let currentAmount = amount;
+    const finishedData = {
+        labels: labels,
+        responsive: true,
+        datasets: [
+            {
+                maxBarThickness: 150,
+                minBarLength: 2,
+                data: data,
+                title: 'blue',
+                backgroundColor: 'rgba( 173, 216, 230, 0.9)',
+            },
+        ],
+    };
+
+    function handleChange(value) {
+        if (amount != value) {
+            setAmount(value);
+            setData(getData(amount));
+            setLabels(getLabels(amount));
+        }
+    }
+
+    return (
+        <div className='barChart'>
+            <div style={{ paddingTop: 50 }}>
+                <Slider
+                    aria-label='Always visible'
+                    defaultValue={amount}
+                    onChange={(e) => handleChange(e.target.value)}
+                    step={1}
+                    valueLabelDisplay='on'
+                    min={1}
+                    max={1000}
+                />
+            </div>
+            <Bar options={options} data={finishedData} style={{ position: 'fixed', bottom: 5 }} />
+        </div>
+    );
+}
+
+export default BarChart;

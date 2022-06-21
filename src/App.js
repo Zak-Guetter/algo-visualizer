@@ -26,11 +26,11 @@ function App() {
 
   return (
     <Router>
-      <div className='App' style={{maxHeight: dimensions.height,}}>
+      <div className='App' style={{maxHeight: dimensions.height}}>
         <div className='SidebarContainer' style={{float: 'left'}}>
           <Sidebar height={dimensions.height}/>
         </div>
-        <div className='ContentContainer' style={{maxHeight: dimensions.height, float: 'right'}}>
+        <div className='ContentContainer' style={{maxHeight: dimensions.height, marginLeft: 270}}>
           <Routes>
             <Route path="/" element={<Home/>}/>
             <Route path="/bubble-sort" element={<Home/>}/>
