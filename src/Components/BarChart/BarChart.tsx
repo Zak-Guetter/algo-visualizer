@@ -77,17 +77,82 @@ function BarChart() {
     }
 
     return (
-        <div className='barChart'>
-            <div style={{ paddingTop: 50 }}>
-                <Slider
-                    aria-label='Always visible'
-                    defaultValue={amount}
-                    onChange={(e) => handleChange(e.target.value)}
-                    step={1}
-                    valueLabelDisplay='on'
-                    min={1}
-                    max={1000}
-                />
+        <div className='barChart' style={{ width: '100%' }}>
+            <div
+                style={{
+                    display: 'flex',
+                    width: '100%',
+                    justifyContent: 'center',
+                }}>
+                <div
+                    style={{
+                        background: 'rgb(29,29,29)',
+                        display: 'flex',
+                        flexDirection: 'row',
+                        paddingTop: 10,
+                        width: '50%',
+                        borderBottomLeftRadius: 10,
+                        borderBottomRightRadius: 10,
+                    }}>
+                    <div
+                        style={{
+                            textAlign: 'center',
+                            marginLeft: 25,
+                            display: 'flex',
+                            flexDirection: 'column',
+                            paddingBottom: 20,
+                        }}>
+                        <span style={{ color: 'rgb(163,163,163)' }}>
+                            <b>Amt. of Columns</b>
+                        </span>
+                        <Slider
+                            aria-label='Always visible'
+                            defaultValue={amount}
+                            onChange={(e) => handleChange(e.target.value)}
+                            step={1}
+                            min={5}
+                            max={1000}
+                            style={{ width: '100%' }}
+                        />
+                    </div>
+                    <div
+                        style={{
+                            textAlign: 'center',
+                            marginLeft: 25,
+                            display: 'flex',
+                            flexDirection: 'column',
+                            paddingBottom: 20,
+                        }}>
+                        <span style={{ color: 'rgb(163,163,163)', paddingBottom: 5 }}>
+                            <b>Sort Algo</b>
+                        </span>
+                        <select>
+                            <option>None</option>
+                            <option>Bubble</option>
+                            <option>Select</option>
+                            <option>Heap</option>
+                            <option>Merge</option>
+                            <option>Quick</option>
+                        </select>
+                    </div>
+                    <div
+                        style={{
+                            textAlign: 'center',
+                            marginLeft: 25,
+                            display: 'flex',
+                            flexDirection: 'column',
+                            paddingBottom: 20,
+                        }}>
+                        <span style={{ color: 'rgb(163,163,163)', paddingBottom: 5 }}>
+                            <b>Search Algo</b>
+                        </span>
+                        <select>
+                            <option>None</option>
+                            <option>Linear</option>
+                            <option>Binary</option>
+                        </select>
+                    </div>
+                </div>
             </div>
             <Bar options={options} data={finishedData} style={{ position: 'fixed', bottom: 5 }} />
         </div>
