@@ -90,9 +90,10 @@ function BarChart() {
                         display: 'flex',
                         flexDirection: 'row',
                         paddingTop: 10,
-                        width: '50%',
+                        width: '40%',
                         borderBottomLeftRadius: 10,
                         borderBottomRightRadius: 10,
+                        justifyContent: 'center',
                     }}>
                     <div
                         style={{
@@ -100,7 +101,7 @@ function BarChart() {
                             marginLeft: 25,
                             display: 'flex',
                             flexDirection: 'column',
-                            paddingBottom: 20,
+                            paddingBottom: 15,
                         }}>
                         <span style={{ color: 'rgb(163,163,163)' }}>
                             <b>Amt. of Columns</b>
@@ -112,7 +113,7 @@ function BarChart() {
                             step={1}
                             min={5}
                             max={1000}
-                            style={{ width: '100%' }}
+                            style={{ width: '100%', paddingTop: 25 }}
                         />
                     </div>
                     <div
@@ -126,7 +127,7 @@ function BarChart() {
                         <span style={{ color: 'rgb(163,163,163)', paddingBottom: 5 }}>
                             <b>Sort Algo</b>
                         </span>
-                        <select>
+                        <select style={{ borderRadius: 8, padding: 5 }}>
                             <option>None</option>
                             <option>Bubble</option>
                             <option>Select</option>
@@ -146,11 +147,26 @@ function BarChart() {
                         <span style={{ color: 'rgb(163,163,163)', paddingBottom: 5 }}>
                             <b>Search Algo</b>
                         </span>
-                        <select>
+                        <select style={{ borderRadius: 8, padding: 5 }}>
                             <option>None</option>
                             <option>Linear</option>
                             <option>Binary</option>
                         </select>
+                    </div>
+                    <div style={{ alignSelf: 'center', marginLeft: 20, float: 'right' }}>
+                        <button
+                            style={{
+                                padding: 5,
+                                paddingRight: 14,
+                                paddingLeft: 14,
+                                fontSize: 18,
+                                backgroundColor: 'rgb(25,118,210)',
+                                color: '#FFFFFF',
+                                border: 'none',
+                                borderRadius: 8,
+                            }}>
+                            <b>Start</b>
+                        </button>
                     </div>
                 </div>
             </div>
