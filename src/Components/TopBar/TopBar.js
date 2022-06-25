@@ -1,7 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import Slider from '@mui/material/Slider';
 
-function TopBar({ handleChange, amount }) {
+function TopBar({ handleChange, amount, sortAlgo, setSortAlgo, searchAlgo, setSearchAlgo, search, setSearch }) {
+    let array = [];
+    for (let x = 1; x <= 100; x++) {
+        array.push(x);
+    }
+
     return (
         <div
             style={{
@@ -89,7 +94,12 @@ function TopBar({ handleChange, amount }) {
                     <span style={{ color: 'rgb(163,163,163)', paddingBottom: 5 }}>
                         <b>Number to Find</b>
                     </span>
-                    <select style={{ borderRadius: 8, padding: 5 }}></select>
+                    <select style={{ borderRadius: 8, padding: 5 }}>
+                        <option value={-1}>Do No Search</option>
+                        {array.map((index) => (
+                            <option value={index}>{index}</option>
+                        ))}
+                    </select>
                 </div>
                 <div style={{ alignSelf: 'center', marginLeft: 20, float: 'right' }}>
                     <button

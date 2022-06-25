@@ -1,14 +1,64 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import BarChart from '../../Components/BarChart';
+import TopBar from '../../Components/TopBar/TopBar';
 
-
-
-function Home() {
-  return (
-    <div className='barChart'>
-      <BarChart />
-    </div>
-  )
+function getData(amount: number) {
+    let min = 1;
+    let max = amount;
+    let array: Array<Object> = [];
+    for (let i = 0; i < amount; i++) {
+        array.push({ x: i, y: Math.floor(Math.random() * (max - min + 1) + min) });
+    }
+    return array;
 }
 
-export default Home
+function getLabels(amount: number) {
+    let label: Array<String> = [];
+    for (let i = 0; i < amount; i++) {
+        label.push(`Item: ${i}`);
+    }
+    return label;
+}
+
+function Home() {
+    const [amount, setAmount] = useState(200);
+    const [data, setData] = useState(getData(amount));
+    const [labels, setLabels] = useState(getLabels(amount));
+    const [sortAlgo, setSortAlgo] = useState();
+    const [searchAlgo, setSearchAlgo] = useState();
+    const [search, setSearch] = useState();
+
+    function handleChange(value) {
+        if (amount != value) {
+            setAmount(value);
+            setData(getData(amount));
+            setLabels(getLabels(amount));
+        }
+    }
+
+    return (
+        <div className='barChart'>
+            <TopBar
+                handleChange={handleChange}
+                amount={amount}
+                sortAlgo={sortAlgo}
+                setSortAlgo={setSortAlgo}
+                searchAlgo={searchAlgo}
+                setSearchAlgo={setSearchAlgo}
+                search={search}
+                setSearch={setSearch}
+            />
+            <BarChart
+                handleChange={handleChange}
+                amount={amount}
+                setAmount={setAmount}
+                data={data}
+                setData={setData}
+                labels={labels}
+                setLabels={setLabels}
+            />
+        </div>
+    );
+}
+
+export default Home;
