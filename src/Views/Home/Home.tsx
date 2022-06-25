@@ -28,7 +28,7 @@ function Home() {
     const [searchAlgo, setSearchAlgo] = useState();
     const [search, setSearch] = useState();
 
-    function handleChange(value) {
+    function handleBarChange(value) {
         if (amount != value) {
             setAmount(value);
             setData(getData(amount));
@@ -36,10 +36,24 @@ function Home() {
         }
     }
 
+    function handleTopBarChange(sortAlgoValue, searchAlgoValue, searchValue) {
+        if (sortAlgoValue !== sortAlgo) {
+            setSortAlgo(sortAlgoValue);
+        }
+
+        if (searchAlgoValue !== searchAlgo) {
+            setSearchAlgo(searchAlgoValue);
+        }
+
+        if (searchValue !== search) {
+            setSearch(searchValue);
+        }
+    }
+
     return (
         <div className='barChart'>
             <TopBar
-                handleChange={handleChange}
+                handleChange={handleTopBarChange}
                 amount={amount}
                 sortAlgo={sortAlgo}
                 setSortAlgo={setSortAlgo}
@@ -49,7 +63,7 @@ function Home() {
                 setSearch={setSearch}
             />
             <BarChart
-                handleChange={handleChange}
+                handleChange={handleBarChange}
                 amount={amount}
                 setAmount={setAmount}
                 data={data}
