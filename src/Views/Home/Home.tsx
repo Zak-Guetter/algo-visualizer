@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import { formControlLabelClasses } from '@mui/material';
+import React, { useEffect, useState } from 'react';
 import BarChart from '../../Components/BarChart';
 import TopBar from '../../Components/TopBar/TopBar';
 
@@ -24,46 +25,49 @@ function Home() {
     const [amount, setAmount] = useState(200);
     const [data, setData] = useState(getData(amount));
     const [labels, setLabels] = useState(getLabels(amount));
-    const [sortAlgo, setSortAlgo] = useState();
-    const [searchAlgo, setSearchAlgo] = useState();
-    const [search, setSearch] = useState();
+    const [sortAlgo, setSortAlgo] = useState('0');
+    const [searchAlgo, setSearchAlgo] = useState('0');
+    const [search, setSearch] = useState('0');
 
-    function handleBarChange(value) {
-        if (amount != value) {
-            setAmount(value);
+    function handleChange(newAmount, newSortAlgo, newSearchAlgo, newSearch) {
+        if (amount !== newAmount) {
+            setAmount(newAmount);
             setData(getData(amount));
             setLabels(getLabels(amount));
         }
-    }
 
-    function handleTopBarChange(sortAlgoValue, searchAlgoValue, searchValue) {
-        if (sortAlgoValue !== sortAlgo) {
-            setSortAlgo(sortAlgoValue);
+        if (sortAlgo !== newSortAlgo) {
+            setSortAlgo(newSortAlgo);
         }
 
-        if (searchAlgoValue !== searchAlgo) {
-            setSearchAlgo(searchAlgoValue);
+        if (searchAlgo !== newSearchAlgo) {
+            setSearchAlgo(newSearchAlgo);
         }
 
-        if (searchValue !== search) {
-            setSearch(searchValue);
+        if (search !== newSearch) {
+            setSearch(newSearch);
         }
     }
+
+    /**
+     * useEffect(() => {
+        console.log('amount: ' + amount);
+        console.log('sortAlgo: ' + sortAlgo);
+        console.log('searchAlgo: ' + searchAlgo);
+        console.log('search: ' + search);
+    });
+     */
 
     return (
         <div className='barChart'>
             <TopBar
-                handleChange={handleTopBarChange}
+                handleChange={handleChange}
                 amount={amount}
                 sortAlgo={sortAlgo}
-                setSortAlgo={setSortAlgo}
                 searchAlgo={searchAlgo}
-                setSearchAlgo={setSearchAlgo}
                 search={search}
-                setSearch={setSearch}
             />
             <BarChart
-                handleChange={handleBarChange}
                 amount={amount}
                 setAmount={setAmount}
                 data={data}

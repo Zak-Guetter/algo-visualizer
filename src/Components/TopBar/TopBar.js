@@ -1,16 +1,6 @@
-import React, { useEffect, useState } from 'react';
 import Slider from '@mui/material/Slider';
 
-function TopBar({
-    handleChange,
-    amount,
-    sortAlgo,
-    setSortAlgo,
-    searchAlgo,
-    setSearchAlgo,
-    search,
-    setSearch,
-}) {
+function TopBar({ handleChange, amount, sortAlgo, searchAlgo, search }) {
     let array = [];
     for (let x = 1; x <= 100; x++) {
         array.push(x);
@@ -26,7 +16,6 @@ function TopBar({
             <div
                 style={{
                     background: 'rgb(29,29,29)',
-
                     paddingTop: 10,
                     borderBottomLeftRadius: 10,
                     borderBottomRightRadius: 10,
@@ -45,9 +34,10 @@ function TopBar({
                             <b>Amt. of Columns</b>
                         </span>
                         <Slider
-                            aria-label='Always visible'
-                            defaultValue={amount}
-                            onChange={(e) => handleChange(e.target.value)}
+                            value={amount}
+                            onChange={(e) =>
+                                handleChange(e.target.value, sortAlgo, searchAlgo, search)
+                            }
                             step={1}
                             min={5}
                             max={1000}
@@ -65,13 +55,18 @@ function TopBar({
                         <span style={{ color: 'rgb(163,163,163)', paddingBottom: 5 }}>
                             <b>Sort Algo</b>
                         </span>
-                        <select style={{ borderRadius: 8, padding: 5 }}>
-                            <option>None</option>
-                            <option>Bubble</option>
-                            <option>Select</option>
-                            <option>Heap</option>
-                            <option>Merge</option>
-                            <option>Quick</option>
+                        <select
+                            defaultValue={sortAlgo}
+                            onChange={(e) => {
+                                handleChange(amount, e.target.value, searchAlgo, search);
+                            }}
+                            style={{ borderRadius: 8, padding: 5 }}>
+                            <option value='0'>None</option>
+                            <option value='1'>Bubble</option>
+                            <option value='2'>Select</option>
+                            <option value='3'>Heap</option>
+                            <option value='4'>Merge</option>
+                            <option value='5'>Quick</option>
                         </select>
                     </div>
                     <div
@@ -90,10 +85,15 @@ function TopBar({
                             }}>
                             <b>Search Algo</b>
                         </span>
-                        <select style={{ borderRadius: 8, padding: 5 }}>
-                            <option>None</option>
-                            <option>Linear</option>
-                            <option>Binary</option>
+                        <select
+                            defaultValue={searchAlgo}
+                            onChange={(e) => {
+                                handleChange(amount, sortAlgo, e.target.value, search);
+                            }}
+                            style={{ borderRadius: 8, padding: 5 }}>
+                            <option value='0'>None</option>
+                            <option value='1'>Linear</option>
+                            <option value='2'>Binary</option>
                         </select>
                     </div>
                     <div
@@ -112,10 +112,17 @@ function TopBar({
                             }}>
                             <b>Number to Find</b>
                         </span>
-                        <select style={{ borderRadius: 8, padding: 5 }}>
+                        <select
+                            defaultValue={search}
+                            onChange={(e) => {
+                                handleChange(amount, sortAlgo, searchAlgo, e.target.value);
+                            }}
+                            style={{ borderRadius: 8, padding: 5 }}>
                             <option value={-1}>Do No Search</option>
                             {array.map((index) => (
-                                <option value={index}>{index}</option>
+                                <option key={index} value={index}>
+                                    {index}
+                                </option>
                             ))}
                         </select>
                     </div>
